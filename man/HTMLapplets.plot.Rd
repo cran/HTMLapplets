@@ -2,7 +2,10 @@
 \alias{HTMLapplets.plot}
 \title{HTMLapplets.plot}
 \description{
-  Create a dynamic 2D scatterplot in an R2HTML document.
+  Create a dynamic 2D scatterplot in an R2HTML document. Undesired
+  effects might occur if several plots are put into a single HTML
+  document. The applet used is a customised version of PtPlot
+  (http://ptolemy.eecs.berkeley.edu/).
 }
 \usage{
 HTMLapplets.plot(x, y = NULL,
@@ -28,7 +31,10 @@ HTMLapplets.plot(x, y = NULL,
   \item{width}{applet width}
   \item{height}{applet height}
   \item{background}{background colour of the plot (no "\#" allowed)}
-  \item{codebase}{codebase parameter for the applet tag.}
+  \item{codebase}{codebase parameter for the applet tag. If the jar
+    files are in a specific directory (e.g. HTTPDIR/runtime/jar/),
+    set the codebase parameter accordingly (e.g. "/runtime/jar") and set
+    the parameter copy.jar to FALSE.}
   \item{archive}{name of the jar file.}
   \item{copy.jar}{if TRUE (default) the jar file is copied to the HTML
     target directory}
@@ -55,17 +61,19 @@ sd <- apply(chicks,1,sd, na.rm=TRUE)
 
 cat("CREATING \"./chicksPlot.html\"\n")
 
-HTMLInitFile("./","chicksPlot")
-HTML.title("HTMLapplets")
 # first plot
+HTMLInitFile("./","chicksPlot1")
+HTML.title("HTMLapplets")
 HTMLapplets.plot(id="all",
             x=chicks$Time,
             y=chicks[,2:10],
             xlab="time", ylab="Weight", main="Test1",
             xlim=c(8,13), ylim=c(50,100),
             type="l", pch=1, height=250, help=TRUE)
-HTMLhr()
+HTMLEndFile()
 # second plot
+HTMLInitFile("./","chicksPlot2")
+HTML.title("HTMLapplets")
 HTMLapplets.plot(id="summary",
             x=chicks$Time,
             y=mean,

@@ -3,7 +3,9 @@
 \alias{HTMLapplets}
 \title{HTMLapplets.data.frame}
 \description{
-  Displays a data frame in a dynamic grid within an R2HTML document.
+  Displays a data frame in a dynamic grid within an R2HTML
+  document. Undesired effects might occur if several plots are put into
+  a single HTML document.
 }
 \usage{
 HTMLapplets.data.frame(x,
@@ -26,7 +28,10 @@ HTMLapplets.data.frame(x,
   \item{save.csv}{if TRUE, the CSV file is created.}
   \item{width}{applet width.}
   \item{height}{applet height.}
-  \item{codebase}{codebase parameter for the applet tag.}
+  \item{codebase}{codebase parameter for the applet tag. If the jar
+    files are in a specific directory (e.g. HTTPDIR/runtime/jar/),
+    set the codebase parameter accordingly (e.g. "/runtime/jar") and set
+    the parameter copy.jar to FALSE.}
   \item{archive}{name of the jar file.}
   \item{copy.jar}{if TRUE (default) the jar file is copied to the HTML target directory.}
   \item{overwrite.jar}{if TRUE (default) replace the jar file if it
